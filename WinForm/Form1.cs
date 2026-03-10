@@ -14,9 +14,12 @@ public partial class Form1 : Form
         try
         {
             var argument = (double)numericUpDown2.Value;
+            
             if (argument < 0 || argument == 1)
                 throw new ArgumentOutOfRangeException("Несоответствие ОДЗ: X меньше 0 или равен 1.");
+            
             var precision = (double)numericUpDown1.Value;
+            
             var valueFirst = CalculateFunction(argument);
             var valueSecond = CalculateSum(argument, precision);
             int amountOfRows;
@@ -40,7 +43,7 @@ public partial class Form1 : Form
     {
         double? lastResult = null;
         double? currentResult = 0;
-        for (int i = 0; lastResult == null || lastResult - currentResult > precision; i++)
+        for (int i = 0; lastResult == null || Math.Abs(lastResult.Value - currentResult.Value) > precision; i++)
         {
             lastResult = currentResult;
             var powValue = 2 * i + 1;
@@ -55,7 +58,7 @@ public partial class Form1 : Form
     {
         double? lastResult = null;
         double? currentResult = (argument - 1) / (argument+1);
-        for (numberOfCalcRows = 1; lastResult == null || lastResult - currentResult > precision; numberOfCalcRows++)
+        for (numberOfCalcRows = 1; lastResult == null || Math.Abs(lastResult.Value - currentResult.Value) > precision; numberOfCalcRows++)
         {
             lastResult = currentResult;
             var powNum = 2 * numberOfCalcRows + 1;
