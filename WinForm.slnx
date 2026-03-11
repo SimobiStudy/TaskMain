@@ -1,3 +1,9 @@
 <Solution>
-  <Project Path="WinForm/WinForm.csproj" />
+  <Folder Name="/Task1/">
+    <Project Path="WinForm/WinForm.csproj" />
+  </Folder>
+  <Folder Name="/Task2/">
+    <Project Path="MainForm/MainForm.csproj" />
+    <Project Path="UnitTestTask/UnitTestTask.csproj" />
+  </Folder>
 </Solution>
