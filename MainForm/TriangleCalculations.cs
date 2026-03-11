@@ -74,12 +74,12 @@ public class TriangleCalculations
         return [firstHeight, secondHeight, thirdHeight];
     }
     
-    private double RadiansToDegrees(double radian)
+    public double RadiansToDegrees(double radian)
     {
         return radian * 180 / Math.PI;
     }
 
-    private double DegreesToRadians(double degree)
+    public double DegreesToRadians(double degree)
     {
         return degree * Math.PI / 180;
     }
