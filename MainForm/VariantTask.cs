@@ -3,28 +3,6 @@ using JetBrains.Annotations;
 
 namespace MainForm;
 
-[PublicAPI]
-public static class VariantTask
-{
-    /// <summary>
-    /// Проверка возможности существования треугольника
-    /// </summary>
-    /// <param name="triangle">Класс треугольника <see cref="Triangle"/></param>
-    /// <returns>True - если треугольник возможен, иначе False</returns>
-    public static bool ValidateTriangle(Triangle triangle)
-    {
-        if (triangle.A >= triangle.B + triangle.C)
-            return false;
-        
-        if (triangle.B >= triangle.A + triangle.C)
-            return false;
-        
-        if (triangle.C >= triangle.A + triangle.B)
-            return false;
-        
-        return true;
-    }
-}
 
 [SuppressMessage("ReSharper", "CompareOfFloatsByEqualityOperator")]
 public class Triangle
