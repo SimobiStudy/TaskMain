@@ -25,15 +25,19 @@ public partial class Form1 : Form
         for (int i = 0; i < 10; i++)
         {
             int a; int b; int c;
+            Triangle tr;
             do
             {
                 a = random.Next(1, 150);
                 b = random.Next(1, 150);
                 c = random.Next(1, 150);
-            } while (!TriangleCalculations.ValidateTriangle(new Triangle(a,b,c)));
-            
+                tr = new Triangle(a, b, c);
+            } while (!tr.ValidateTriangle());
+
             dataGridView1.Rows.Add(a, b, c);
         }
+
+        button2.Enabled = true;
     }
 
 
@@ -53,9 +57,9 @@ public partial class Form1 : Form
             int b = Convert.ToInt32(row.Cells[1].Value);
             int c = Convert.ToInt32(row.Cells[2].Value);
             var tria = new Triangle(a, b, c);
-            var area = TriangleCalculations.GetTriangleArea(tria);
-            var angles = TriangleCalculations.GetTriangleAngles(tria);
-            var heights = TriangleCalculations.GetTriangleHeights(tria);
+            var area = tria.GetTriangleArea();
+            var angles = tria.GetTriangleAngles();
+            var heights = tria.GetTriangleHeights();
             string resultString = $"Треугольник {count}:\n" +
                                   $"Стороны: {a}, {b}, {c}:\n" +
                                   $"Площадь: {area}\n" +
@@ -76,5 +80,22 @@ public partial class Form1 : Form
     private void button1_Click(object sender, EventArgs e)
     {
         GenerateTriangles();
+    }
+
+    private void dataGridView1_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+    {
+        foreach (DataGridViewRow row in dataGridView1.Rows)
+        {
+            if (row.IsNewRow) continue;
+            int a = Convert.ToInt32(row.Cells[0].Value);
+            int b = Convert.ToInt32(row.Cells[1].Value);
+            int c = Convert.ToInt32(row.Cells[2].Value);
+            if (!(new Triangle(a, b, c)).ValidateTriangle())
+            {
+                MessageBox.Show($"Треугольник со сторонами {a}, {b}, {c} невозможен. ", "ОШИБКА", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                e.Cancel = true;
+            }
+        }
     }
 }
