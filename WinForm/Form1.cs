@@ -26,7 +26,7 @@ public partial class Form1 : Form
             var valueThird = CalculateRow(argument, precision, out amountOfRows);
 
             SendResult($"Результат ln x: {valueFirst}", $"Результат Суммы: {valueSecond}",
-                $"Кол-во членов ряда: {valueThird}");
+                $"Кол-во членов ряда: {amountOfRows}");
         }
         catch (Exception ex)
         {
