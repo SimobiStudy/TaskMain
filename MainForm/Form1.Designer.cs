@@ -70,9 +70,11 @@ partial class Form1
         dataGridView1.Size = new Size(179, 291);
         dataGridView1.TabIndex = 2;
         dataGridView1.Text = "dataGridView1";
+        dataGridView1.Validating += dataGridView1_Validating;
         // 
         // button2
         // 
+        button2.Enabled = false;
         button2.Font = new Font("Roboto", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 204);
         button2.Location = new Point(12, 254);
         button2.Name = "button2";
@@ -92,7 +94,7 @@ partial class Form1
         Controls.Add(button1);
         Controls.Add(labelHeader);
         Name = "Form1";
-        Text = "Form1";
+        Text = "Вычисления треугольника";
         Load += Form1_Load;
         ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
         ResumeLayout(false);
