@@ -9,7 +9,7 @@ public static class LoginManager
     {
         var getLogins = await Master.supabaseClient
             .From<User>()
-            //.Filter("username", Constants.Operator.Equals, username)
+            .Filter("username", Constants.Operator.Equals, username)
             .Get();
 
         if (!getLogins.Models.Any())
@@ -23,5 +23,17 @@ public static class LoginManager
         }
 
         return false;
+    }
+
+    public async static Task<User> RegisterNewUser(string username, string password)
+    {
+        var user = new User()
+        {
+            Username = username,
+            Password = password,
+        };
+        
+        var res = await  Master.supabaseClient.From<User>().Insert(user);
+        return res == null! ? res.Model : null;
     }
 }

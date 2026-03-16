@@ -26,7 +26,7 @@ public class Main_
         Master.supabaseClient = new Supabase.Client(url, key, options);
         Master.supabaseClient.InitializeAsync().GetAwaiter().GetResult();
 
-        var mainForm = new Form1();
+        var mainForm = new MainForm();
         Application.Run(mainForm);
     }
     
