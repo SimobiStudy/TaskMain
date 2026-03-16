@@ -4,9 +4,8 @@
 public class Main_
 {
     
-    public async static Task Main()
+    public static void Main()
     {
-        
         Console.WriteLine("Check");
         string url, key;
         try
@@ -25,28 +24,10 @@ public class Main_
             AutoConnectRealtime = true
         };
         Master.supabaseClient = new Supabase.Client(url, key, options);
-        await Master.supabaseClient.InitializeAsync();
-        await StartLogin();
-    }
+        Master.supabaseClient.InitializeAsync().GetAwaiter().GetResult();
 
-    public async static Task StartLogin()
-    {
-        Console.WriteLine("Вход в аккаунт.");
-        bool loginSuccesful = false;
-        while (!loginSuccesful){
-            Console.WriteLine("Введите Username:");
-            var username = Console.ReadLine()?.Trim();
-            Console.WriteLine("Введите Password:");
-            var password = Console.ReadLine()?.Trim();
-            loginSuccesful = await LoginManager.GetLoginResult(username, password);
-            if (!loginSuccesful)
-                Console.WriteLine("Неверный логин или пароль");
-            else
-            {
-                Console.WriteLine("Успешный вход в аккаунт!");
-            }
-        }
-
-        Console.ReadKey(true);
+        var mainForm = new Form1();
+        Application.Run(mainForm);
     }
+    
 }
