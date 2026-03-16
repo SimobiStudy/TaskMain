@@ -38,6 +38,7 @@ partial class RegisterForm
         button1 = new System.Windows.Forms.Button();
         openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
         pictureBox1 = new System.Windows.Forms.PictureBox();
+        button2 = new System.Windows.Forms.Button();
         ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
         SuspendLayout();
         // 
@@ -87,17 +88,29 @@ partial class RegisterForm
         // 
         // pictureBox1
         // 
-        pictureBox1.Location = new System.Drawing.Point(179, 172);
+        pictureBox1.Location = new System.Drawing.Point(167, 165);
         pictureBox1.Name = "pictureBox1";
-        pictureBox1.Size = new System.Drawing.Size(80, 80);
+        pictureBox1.Size = new System.Drawing.Size(79, 78);
+        pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
         pictureBox1.TabIndex = 5;
         pictureBox1.TabStop = false;
+        // 
+        // button2
+        // 
+        button2.Location = new System.Drawing.Point(29, 165);
+        button2.Name = "button2";
+        button2.Size = new System.Drawing.Size(81, 78);
+        button2.TabIndex = 6;
+        button2.Text = "Выбрать аватар";
+        button2.UseVisualStyleBackColor = true;
+        button2.Click += button2_Click;
         // 
         // RegisterForm
         // 
         AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         ClientSize = new System.Drawing.Size(271, 450);
+        Controls.Add(button2);
         Controls.Add(pictureBox1);
         Controls.Add(button1);
         Controls.Add(label2);
@@ -110,8 +123,11 @@ partial class RegisterForm
         PerformLayout();
     }
 
-    private System.Windows.Forms.OpenFileDialog openFileDialog1;
+    private System.Windows.Forms.Button button2;
+
     private System.Windows.Forms.PictureBox pictureBox1;
+
+    private System.Windows.Forms.OpenFileDialog openFileDialog1;
 
     private System.Windows.Forms.Button button1;
 

@@ -3,7 +3,7 @@
 #nullable disable
 public class Main_
 {
-    
+    [STAThread]
     public static void Main()
     {
         Console.WriteLine("Check");
@@ -25,7 +25,6 @@ public class Main_
         };
         Master.supabaseClient = new Supabase.Client(url, key, options);
         Master.supabaseClient.InitializeAsync().GetAwaiter().GetResult();
-
         var mainForm = new MainForm();
         Application.Run(mainForm);
     }

@@ -6,7 +6,8 @@ namespace SupabaseReg.Types.DatabaseTypes;
 [Table("users")]
 public class User : BaseModel
 {
-    [PrimaryKey("username")]
+    [PrimaryKey("username", false)]
+    [Column("username")]
     public string Username { get; set; }
     
     [Column("password")]

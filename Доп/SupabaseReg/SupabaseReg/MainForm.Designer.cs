@@ -36,6 +36,9 @@ partial class MainForm
         label2 = new System.Windows.Forms.Label();
         textBoxPassword = new System.Windows.Forms.TextBox();
         buttonLogin = new System.Windows.Forms.Button();
+        pictureBox1 = new System.Windows.Forms.PictureBox();
+        button1 = new System.Windows.Forms.Button();
+        ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
         SuspendLayout();
         // 
         // textBoxLogin
@@ -78,20 +81,46 @@ partial class MainForm
         buttonLogin.UseVisualStyleBackColor = true;
         buttonLogin.Click += buttonLogin_Click;
         // 
-        // Form1
+        // pictureBox1
+        // 
+        pictureBox1.Location = new System.Drawing.Point(349, 60);
+        pictureBox1.Name = "pictureBox1";
+        pictureBox1.Size = new System.Drawing.Size(146, 147);
+        pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+        pictureBox1.TabIndex = 5;
+        pictureBox1.TabStop = false;
+        // 
+        // button1
+        // 
+        button1.Location = new System.Drawing.Point(33, 246);
+        button1.Name = "button1";
+        button1.Size = new System.Drawing.Size(135, 69);
+        button1.TabIndex = 6;
+        button1.Text = "Регистрация";
+        button1.UseVisualStyleBackColor = true;
+        button1.Click += button1_Click;
+        // 
+        // MainForm
         // 
         AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         ClientSize = new System.Drawing.Size(597, 450);
+        Controls.Add(button1);
+        Controls.Add(pictureBox1);
         Controls.Add(buttonLogin);
         Controls.Add(textBoxPassword);
         Controls.Add(label2);
         Controls.Add(label1);
         Controls.Add(textBoxLogin);
         Text = "Форма входа";
+        ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
         ResumeLayout(false);
         PerformLayout();
     }
+
+    private System.Windows.Forms.Button button1;
+
+    private System.Windows.Forms.PictureBox pictureBox1;
 
     private System.Windows.Forms.TextBox textBoxLogin;
     private System.Windows.Forms.Label label1;

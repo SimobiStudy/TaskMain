@@ -8,4 +8,6 @@ namespace SupabaseReg;
 public static class Master
 {
     public static ISupabaseClient<User,Session,RealtimeSocket,RealtimeChannel,Bucket,FileObject> supabaseClient;
+    
+    public static SupabaseReg.Types.DatabaseTypes.User currentUser;
 }
