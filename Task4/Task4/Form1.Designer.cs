@@ -47,12 +47,21 @@ partial class Form1
         comboBoxTeam2 = new System.Windows.Forms.ComboBox();
         label7 = new System.Windows.Forms.Label();
         button1 = new System.Windows.Forms.Button();
+        dataGridMatch = new System.Windows.Forms.DataGridView();
+        Команды = new System.Windows.Forms.DataGridViewTextBoxColumn();
+        Score = new System.Windows.Forms.DataGridViewTextBoxColumn();
+        GotGoals = new System.Windows.Forms.DataGridViewTextBoxColumn();
+        WrongGoals = new System.Windows.Forms.DataGridViewTextBoxColumn();
+        button2 = new System.Windows.Forms.Button();
+        button3 = new System.Windows.Forms.Button();
         tabControl1.SuspendLayout();
         tabPage1.SuspendLayout();
+        tabPage2.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)numericUDUp1).BeginInit();
         ((System.ComponentModel.ISupportInitialize)numericUDDown1).BeginInit();
         ((System.ComponentModel.ISupportInitialize)numericUDDown2).BeginInit();
         ((System.ComponentModel.ISupportInitialize)numericUDUp2).BeginInit();
+        ((System.ComponentModel.ISupportInitialize)dataGridMatch).BeginInit();
         SuspendLayout();
         // 
         // tabControl1
@@ -94,21 +103,24 @@ partial class Form1
         // 
         // tabPage2
         // 
-        tabPage2.Location = new System.Drawing.Point(4, 29);
+        tabPage2.Controls.Add(button3);
+        tabPage2.Controls.Add(button2);
+        tabPage2.Controls.Add(dataGridMatch);
+        tabPage2.Location = new System.Drawing.Point(4, 31);
         tabPage2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
         tabPage2.Name = "tabPage2";
         tabPage2.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-        tabPage2.Size = new System.Drawing.Size(872, 493);
+        tabPage2.Size = new System.Drawing.Size(872, 491);
         tabPage2.TabIndex = 1;
         tabPage2.Text = "Таблица";
         tabPage2.UseVisualStyleBackColor = true;
         // 
         // tabPage3
         // 
-        tabPage3.Location = new System.Drawing.Point(4, 29);
+        tabPage3.Location = new System.Drawing.Point(4, 31);
         tabPage3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
         tabPage3.Name = "tabPage3";
-        tabPage3.Size = new System.Drawing.Size(872, 493);
+        tabPage3.Size = new System.Drawing.Size(872, 491);
         tabPage3.TabIndex = 2;
         tabPage3.Text = "Диаграмма";
         tabPage3.UseVisualStyleBackColor = true;
@@ -224,6 +236,77 @@ partial class Form1
         button1.Text = "Ввести результаты";
         button1.UseVisualStyleBackColor = true;
         // 
+        // dataGridMatch
+        // 
+        dataGridMatch.AllowUserToAddRows = false;
+        dataGridMatch.AllowUserToDeleteRows = false;
+        dataGridMatch.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+        dataGridMatch.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+        dataGridMatch.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+        dataGridMatch.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { Команды, Score, GotGoals, WrongGoals });
+        dataGridMatch.Location = new System.Drawing.Point(7, 38);
+        dataGridMatch.Name = "dataGridMatch";
+        dataGridMatch.ReadOnly = true;
+        dataGridMatch.RowHeadersVisible = false;
+        dataGridMatch.RowHeadersWidth = 51;
+        dataGridMatch.Size = new System.Drawing.Size(631, 279);
+        dataGridMatch.TabIndex = 0;
+        dataGridMatch.Text = "dataGridView1";
+        // 
+        // Команды
+        // 
+        Команды.HeaderText = "Команды";
+        Команды.MinimumWidth = 6;
+        Команды.Name = "Команды";
+        Команды.ReadOnly = true;
+        Команды.Width = 119;
+        // 
+        // Score
+        // 
+        Score.HeaderText = "Очки";
+        Score.MinimumWidth = 6;
+        Score.Name = "Score";
+        Score.ReadOnly = true;
+        Score.Width = 81;
+        // 
+        // GotGoals
+        // 
+        GotGoals.HeaderText = "Количество забитых голов";
+        GotGoals.MinimumWidth = 6;
+        GotGoals.Name = "GotGoals";
+        GotGoals.ReadOnly = true;
+        GotGoals.Width = 199;
+        // 
+        // WrongGoals
+        // 
+        WrongGoals.HeaderText = "Количество пропущенных голов";
+        WrongGoals.MinimumWidth = 6;
+        WrongGoals.Name = "WrongGoals";
+        WrongGoals.ReadOnly = true;
+        WrongGoals.Width = 240;
+        // 
+        // button2
+        // 
+        button2.Font = new System.Drawing.Font("Roboto Medium", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)204));
+        button2.ForeColor = System.Drawing.Color.Crimson;
+        button2.Location = new System.Drawing.Point(400, 390);
+        button2.Name = "button2";
+        button2.Size = new System.Drawing.Size(165, 67);
+        button2.TabIndex = 1;
+        button2.Text = "Загрузить из файла";
+        button2.UseVisualStyleBackColor = true;
+        // 
+        // button3
+        // 
+        button3.Font = new System.Drawing.Font("Roboto Medium", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)204));
+        button3.ForeColor = System.Drawing.Color.DarkBlue;
+        button3.Location = new System.Drawing.Point(74, 390);
+        button3.Name = "button3";
+        button3.Size = new System.Drawing.Size(165, 67);
+        button3.TabIndex = 2;
+        button3.Text = "Сохранить в файл";
+        button3.UseVisualStyleBackColor = true;
+        // 
         // Form1
         // 
         AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
@@ -235,12 +318,26 @@ partial class Form1
         Text = "Футбольные результаты";
         tabControl1.ResumeLayout(false);
         tabPage1.ResumeLayout(false);
+        tabPage2.ResumeLayout(false);
         ((System.ComponentModel.ISupportInitialize)numericUDUp1).EndInit();
         ((System.ComponentModel.ISupportInitialize)numericUDDown1).EndInit();
         ((System.ComponentModel.ISupportInitialize)numericUDDown2).EndInit();
         ((System.ComponentModel.ISupportInitialize)numericUDUp2).EndInit();
+        ((System.ComponentModel.ISupportInitialize)dataGridMatch).EndInit();
         ResumeLayout(false);
     }
+
+    private System.Windows.Forms.Button button3;
+
+    private System.Windows.Forms.Button button2;
+
+    private System.Windows.Forms.DataGridViewTextBoxColumn Score;
+
+    private System.Windows.Forms.DataGridViewTextBoxColumn Команды;
+    private System.Windows.Forms.DataGridViewTextBoxColumn GotGoals;
+    private System.Windows.Forms.DataGridViewTextBoxColumn WrongGoals;
+
+    private System.Windows.Forms.DataGridView dataGridMatch;
 
     private System.Windows.Forms.Button button1;
 
