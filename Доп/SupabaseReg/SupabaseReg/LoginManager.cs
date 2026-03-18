@@ -1,47 +1,30 @@
 ﻿using System.CodeDom.Compiler;
+using Supabase.Gotrue;
 using Supabase.Postgrest;
 using Supabase.Storage;
-using SupabaseReg.Types.DatabaseTypes;
+
 
 namespace SupabaseReg;
 
 public static class LoginManager
 {
-    public async static Task<User> GetLoginResult(string username, string password)
+    public async static Task<User> LoginToUser(string email, string password)
     {
-        var getLogins = await Master.supabaseClient
-            .From<User>()
-            //.Filter("username", Constants.Operator.Equals, username)
-            .Get();
 
-        if (!getLogins.Models.Any())
-        {
+        var login = await Master.supabaseClient.Auth.SignIn(email, password);
+        if (login == null)
             return null;
-        }
-
-        foreach (var model in  getLogins.Models)
-        {
-            if (model.Username == username && model.Password == password)
-            {
-                Master.currentUser = model;
-                return model;
-            }
-        }
-
-        return null;
+        return login.User;
     }
 
-    public async static Task<User> RegisterNewUser(string username, string password)
+    public async static Task<User> RegisterNewUser(string email, string password)
     {
-        if (username == null)
-            throw new ArgumentNullException(nameof(username));
-        var user = new User()
-        {
-            Username = username,
-            Password = password,
-        };
-        var res = await Master.supabaseClient.From<User>().Insert(user);
-        return res.Model;
+        var session = await Master.supabaseClient.Auth.SignUp(email, password);
+        if (session == null)
+            throw new Exception("Registration failed, please disable Confirm user in project settings");
+        if (session.User == null)
+            return null!;
+        return session.User;
     }
 
     public async static Task<bool> CheckBucketExistance(string bucketName)
@@ -69,7 +52,7 @@ public static class LoginManager
 
         await Master.supabaseClient.Storage
             .From("avatars")
-            .Upload(filePath, user.Username + "-avatar.png");
+            .Upload(filePath, user.Id + "-avatar.png");
     }
     
     public async static Task<string> GetAvatarFile(User user)
@@ -79,7 +62,7 @@ public static class LoginManager
             return null;
         }
 
-        var bytes = await Master.supabaseClient.Storage.From("avatars").Download(user.Username + "-avatar.png", new TransformOptions());
+        var bytes = await Master.supabaseClient.Storage.From("avatars").Download(user.Id + "-avatar.png", new TransformOptions());
         
         string tempFile = Path.Combine(Path.GetTempPath(), Path.GetFileNameWithoutExtension(Path.GetRandomFileName()));
         await File.WriteAllBytesAsync(tempFile, bytes);

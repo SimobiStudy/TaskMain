@@ -1,4 +1,7 @@
-﻿namespace SupabaseReg;
+﻿using System.ComponentModel;
+using System.Text.RegularExpressions;
+
+namespace SupabaseReg;
 
 public partial class RegisterForm : Form
 {
@@ -14,7 +17,7 @@ public partial class RegisterForm : Form
             await LoginManager.UploadAvatar(tag, newUser);
         if (newUser != null)
         {
-            MessageBox.Show($"Пользователь {newUser.Username} успешно создан", "УСПЕХ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show($"Пользователь {newUser.Id} успешно создан", "УСПЕХ", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         else
         {
@@ -38,5 +41,26 @@ public partial class RegisterForm : Form
         }
         pictureBox1.Image = img;
         pictureBox1.Tag = openFileDialog1.FileName;
+    }
+
+
+    private const string emailRegexValidation = @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$";
+
+    private void textBoxLogin_Validating(object sender, CancelEventArgs e)
+    {
+        TextBox textBox =  (TextBox) sender;
+        if (!Regex.IsMatch(textBox.Text, emailRegexValidation))
+            e.Cancel = true;
+    }
+    
+
+    private void textBoxPassword_Validating(object sender, CancelEventArgs e)
+    {
+        TextBox textBox = (TextBox) sender;
+        if (textBox.Text.Length < 8)
+        {
+            MessageBox.Show("Пароль должен быть размером не менее 8 символов", "ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            e.Cancel = true;
+        }
     }
 }

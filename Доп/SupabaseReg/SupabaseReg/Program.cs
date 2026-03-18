@@ -27,7 +27,6 @@ public class Main_
         };
         Master.supabaseClient = new Supabase.Client(url, key, options);
         Master.supabaseClient.InitializeAsync().GetAwaiter().GetResult();
-        Master.supabaseClient.Auth.SignIn(email, password).GetAwaiter().GetResult();
         var mainForm = new MainForm();
         Application.Run(mainForm);
     }

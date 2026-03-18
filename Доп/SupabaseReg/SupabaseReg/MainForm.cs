@@ -1,4 +1,6 @@
-﻿namespace SupabaseReg;
+﻿using SupabaseReg.Extensions;
+
+namespace SupabaseReg;
 
 public partial class MainForm : Form
 {
@@ -7,27 +9,28 @@ public partial class MainForm : Form
         InitializeComponent();
     }
 
-    private async void buttonLogin_Click(object sender, EventArgs e)
+
+    private void button2_Click(object sender, EventArgs e)
     {
-        var login = await LoginManager.GetLoginResult(textBoxLogin.Text, textBoxPassword.Text);
-        
-        if (login != null)
-        {
-            MessageBox.Show("Верный логин!", "УСПЕХ", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            var avatarFile = await LoginManager.GetAvatarFile(login);
-            if (avatarFile == null) return;
-            Image avatarImg = Image.FromFile(avatarFile);
-            pictureBox1.Image = avatarImg;
-        }
-        else
-        {
-            MessageBox.Show("Неверный логин или пароль!", "ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
+        RegisterForm  registerForm = new RegisterForm();
+        registerForm.ShowDialog();
+        ShowAvatar();
     }
 
-    private void button1_Click(object sender, EventArgs e)
+    private async void ShowAvatar()
     {
-        var regForm = new RegisterForm();
-        regForm.ShowDialog();
+        if (Master.supabaseClient.Auth.CurrentUser == null) return;
+        
+        var file = await LoginManager.GetAvatarFile(Master.supabaseClient.Auth.CurrentUser);
+        if (file == null) return;
+        var img = Image.FromFile(file);
+        pictureBox1.Image = img;
+    }
+
+    private async void button1_Click(object sender, EventArgs e)
+    {
+        LoginForm loginForm = new LoginForm();
+        loginForm.ShowDialog();
+        ShowAvatar();
     }
 }

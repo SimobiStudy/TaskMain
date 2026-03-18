@@ -48,6 +48,7 @@ partial class RegisterForm
         textBoxLogin.Name = "textBoxLogin";
         textBoxLogin.Size = new System.Drawing.Size(195, 27);
         textBoxLogin.TabIndex = 0;
+        textBoxLogin.Validating += textBoxLogin_Validating;
         // 
         // textBoxPassword
         // 
@@ -55,14 +56,15 @@ partial class RegisterForm
         textBoxPassword.Name = "textBoxPassword";
         textBoxPassword.Size = new System.Drawing.Size(195, 27);
         textBoxPassword.TabIndex = 1;
+        textBoxPassword.Validating += textBoxPassword_Validating;
         // 
         // label1
         // 
         label1.Location = new System.Drawing.Point(32, 30);
         label1.Name = "label1";
-        label1.Size = new System.Drawing.Size(100, 23);
+        label1.Size = new System.Drawing.Size(195, 23);
         label1.TabIndex = 2;
-        label1.Text = "Логин";
+        label1.Text = "Электронная почта";
         // 
         // label2
         // 
@@ -74,9 +76,9 @@ partial class RegisterForm
         // 
         // button1
         // 
-        button1.Location = new System.Drawing.Point(43, 274);
+        button1.Location = new System.Drawing.Point(30, 274);
         button1.Name = "button1";
-        button1.Size = new System.Drawing.Size(165, 81);
+        button1.Size = new System.Drawing.Size(197, 81);
         button1.TabIndex = 4;
         button1.Text = "Зарегистрироваться";
         button1.UseVisualStyleBackColor = true;
@@ -88,7 +90,7 @@ partial class RegisterForm
         // 
         // pictureBox1
         // 
-        pictureBox1.Location = new System.Drawing.Point(167, 165);
+        pictureBox1.Location = new System.Drawing.Point(148, 165);
         pictureBox1.Name = "pictureBox1";
         pictureBox1.Size = new System.Drawing.Size(79, 78);
         pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -97,7 +99,7 @@ partial class RegisterForm
         // 
         // button2
         // 
-        button2.Location = new System.Drawing.Point(29, 165);
+        button2.Location = new System.Drawing.Point(32, 165);
         button2.Name = "button2";
         button2.Size = new System.Drawing.Size(81, 78);
         button2.TabIndex = 6;
