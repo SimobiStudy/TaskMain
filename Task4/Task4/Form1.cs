@@ -18,6 +18,11 @@ public partial class Form1 : Form
     {
         var team1Name = comboBoxTeam1.Text;
         var team2Name = comboBoxTeam2.Text;
+        if (string.IsNullOrWhiteSpace(team1Name) || string.IsNullOrWhiteSpace(team2Name))
+        {
+            MessageBox.Show("Пожалуйста, введите команду.", "ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return;
+        }
         matches.Add(new Match
         {
             Team1 = new Team
@@ -25,6 +30,8 @@ public partial class Form1 : Form
             Team2 = new Team
             { Name = team2Name, ShotGoals = (int)numericUDUp2.Value, GotGoals = (int)numericUDUp1.Value }
         });
+
+        MessageBox.Show($"Команда {team1Name} - {team2Name}", "УСПЕХ", MessageBoxButtons.OK, MessageBoxIcon.Information);
     }
 
     private void dataGridMatch_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -42,7 +49,7 @@ public partial class Form1 : Form
                 new DataGridViewTextBoxCell { Value = $"{match.Team1.GetScore()} - {match.Team2.GetScore()}" },
                 new DataGridViewTextBoxCell { Value = $"{match.Team1.ShotGoals} - {match.Team2.ShotGoals}" },
                 new DataGridViewTextBoxCell { Value = $"{match.Team1.GotGoals} - {match.Team2.GotGoals}" },
-                new DataGridViewTextBoxCell { Value = $"{match.GetWinner().Name}" }
+                new DataGridViewTextBoxCell { Value = $"{match.GetWinnerName()}" }
             );
             dataGridMatch.Rows.Add(dataGridRow);
         }
@@ -188,6 +195,13 @@ public class Match
         if (score2 > score1)
             return Team2;
         return null;
+    }
+    public string GetWinnerName()
+    {
+        var winner = GetWinner();
+        if (winner == null)
+            return "Ничья";
+        return winner.Name;
     }
 
     public override string ToString()

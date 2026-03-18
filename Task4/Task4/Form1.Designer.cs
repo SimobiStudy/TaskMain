@@ -148,6 +148,7 @@ partial class Form1
         label6.Size = new Size(136, 34);
         label6.TabIndex = 7;
         label6.Text = "Команда";
+        label6.TextAlign = ContentAlignment.TopRight;
         // 
         // comboBoxTeam2
         // 
@@ -198,11 +199,11 @@ partial class Form1
         tabPage2.Controls.Add(button3);
         tabPage2.Controls.Add(button2);
         tabPage2.Controls.Add(dataGridMatch);
-        tabPage2.Location = new Point(4, 31);
+        tabPage2.Location = new Point(4, 29);
         tabPage2.Margin = new Padding(6, 3, 6, 3);
         tabPage2.Name = "tabPage2";
         tabPage2.Padding = new Padding(6, 3, 6, 3);
-        tabPage2.Size = new Size(1044, 594);
+        tabPage2.Size = new Size(1044, 596);
         tabPage2.TabIndex = 1;
         tabPage2.Text = "Таблица";
         tabPage2.UseVisualStyleBackColor = true;
@@ -309,13 +310,13 @@ partial class Form1
         chart1.ChartAreas.Add(chartArea1);
         legend1.Name = "Legend1";
         chart1.Legends.Add(legend1);
-        chart1.Location = new Point(115, 147);
+        chart1.Location = new Point(0, 3);
         chart1.Name = "chart1";
         series1.ChartArea = "ChartArea1";
         series1.Legend = "Legend1";
         series1.Name = "Series1";
         chart1.Series.Add(series1);
-        chart1.Size = new Size(607, 377);
+        chart1.Size = new Size(1038, 588);
         chart1.TabIndex = 0;
         chart1.Text = "chart1";
         // 
