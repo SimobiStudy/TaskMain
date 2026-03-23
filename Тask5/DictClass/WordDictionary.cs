@@ -3,8 +3,14 @@
 public class WordDictionary
 {
     private List<string> _words = new List<string>();
+
+    public List<string> Words
+    {
+        get => _words;
+    }
+
     private string _filename;
-    private int _wordCount;
+    public int WordCount { get; private set; }
 
     /// <summary>
     /// Конструктор для создания словаря из текстового файла
@@ -14,7 +20,12 @@ public class WordDictionary
     {
         _filename = filename;
         OpenFile();
-        _wordCount = _words.Count;
+        WordCount = _words.Count;
+    }
+
+    public WordDictionary()
+    {
+        WordCount = 0;
     }
 
     private void OpenFile()
@@ -25,6 +36,7 @@ public class WordDictionary
         {
             _words.Add(line);
         }
+        _words.Sort();
     }
 
     /// <summary>
@@ -35,7 +47,8 @@ public class WordDictionary
     {
         if (_words.Contains(word)) return;
         _words.Add(word);
-        _wordCount++;
+        WordCount++;
+        _words.Sort();
     }
 
     /// <summary>
@@ -46,7 +59,8 @@ public class WordDictionary
     {
         if (!_words.Contains(word)) return;
         _words.Remove(word);
-        _wordCount--;
+        WordCount--;
+        _words.Sort();
     }
 
     private int GetLevensteinDistance(string word1, string word2)

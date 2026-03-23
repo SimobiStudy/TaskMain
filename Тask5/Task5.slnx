@@ -1,4 +1,5 @@
 <Solution>
   <Project Path="DictClass/DictClass.csproj" />
+  <Project Path="FormProj/FormProj.csproj" />
   <Project Path="TestDictionary/TestDictionary.csproj" />
 </Solution>
