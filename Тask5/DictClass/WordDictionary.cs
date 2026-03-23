@@ -6,6 +6,10 @@ public class WordDictionary
     private string _filename;
     private int _wordCount;
 
+    /// <summary>
+    /// Конструктор для создания словаря из текстового файла
+    /// </summary>
+    /// <param name="filename">Путь к файлу</param>
     public WordDictionary(string filename)
     {
         _filename = filename;
@@ -15,12 +19,18 @@ public class WordDictionary
 
     private void OpenFile()
     {
+        if (!File.Exists(_filename))
+            throw new FileNotFoundException($"Файл по пути {_filename} не существует.");
         foreach (var line in File.ReadLines(_filename))
         {
             _words.Add(line);
         }
     }
 
+    /// <summary>
+    /// Используйте этот метод для добавления слова в словарь
+    /// </summary>
+    /// <param name="word">Слово, которое надо добавить</param>
     public void AddWord(string word)
     {
         if (_words.Contains(word)) return;
@@ -28,6 +38,10 @@ public class WordDictionary
         _wordCount++;
     }
 
+    /// <summary>
+    /// Используйте этот метод для удаления слова из словаря
+    /// </summary>
+    /// <param name="word">Слово, которое необходимо удалить</param>
     public void RemoveWord(string word)
     {
         if (!_words.Contains(word)) return;
@@ -50,6 +64,12 @@ public class WordDictionary
         return dist;
     }
 
+    /// <summary>
+    /// Используйте этот метод для поиска всех слов с расстоянием Левенштейна не более maxDist для word1
+    /// </summary>
+    /// <param name="word1">Слово для определения расстояния</param>
+    /// <param name="maxDist">Максимальное расстояние левенштейна</param>
+    /// <returns>Список слов с расстоянием Левенштейна не более maxDist</returns>
     public List<string> SearchLevensteinDistance(string word1, int maxDist = 3)
     {
         List<string> result = new List<string>();
@@ -63,6 +83,10 @@ public class WordDictionary
         return result;
     }
 
+    /// <summary>
+    /// Используйте этот метод для поиска палиндромов в словаре
+    /// </summary>
+    /// <returns>Список палиндромов в словаре</returns>
     public List<string> SearchPalindromes()
     {
         var result = new List<string>();
@@ -82,5 +106,22 @@ public class WordDictionary
                 result.Add(word);
         }
         return result;
+    }
+
+    /// <summary>
+    /// Используйте этот метод для поиска валиндрома и вывода их в отдельный текстовый файл
+    /// </summary>
+    /// <param name="fileName">Путь к файлу. Если равен null, то создастся временный текстовый файл</param>
+    /// <returns>Путь к новому файлу</returns>
+    public string SearchPalindromesToFile(string? fileName = null)
+    {
+        var resultPalindromes = SearchPalindromes();
+        string filePath;
+        if (fileName == null)
+            filePath = Path.ChangeExtension(Path.GetTempFileName(), "txt");
+        else
+            filePath = (fileName.Clone() as string)!;
+        File.WriteAllLines(filePath, resultPalindromes);
+        return filePath;
     }
 }
