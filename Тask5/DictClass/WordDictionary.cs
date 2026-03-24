@@ -1,4 +1,6 @@
-﻿namespace DictClass;
+﻿using System.Text;
+
+namespace DictClass;
 
 public class WordDictionary
 {
@@ -16,13 +18,16 @@ public class WordDictionary
     /// Конструктор для создания словаря из текстового файла
     /// </summary>
     /// <param name="filename">Путь к файлу</param>
-    public WordDictionary(string filename)
+    /// <param name="encoding">Кодировка файла</param>
+    public WordDictionary(string filename, Encoding encoding)
     {
         _filename = filename;
-        OpenFile();
+        OpenFile(encoding);
         WordCount = _words.Count;
     }
 
+    public WordDictionary(string filename) : this(filename, Encoding.UTF8) { }
+    
     public WordDictionary()
     {
         WordCount = 0;
@@ -30,13 +35,16 @@ public class WordDictionary
 
     private void OpenFile()
     {
+        OpenFile(Encoding.UTF8);
+    }
+    private void OpenFile(Encoding encoding)
+    {
         if (!File.Exists(_filename))
             throw new FileNotFoundException($"Файл по пути {_filename} не существует.");
-        foreach (var line in File.ReadLines(_filename))
+        foreach (var line in File.ReadLines(_filename, encoding))
         {
-            _words.Add(line);
+            _words.Add(line.ToLower());
         }
-        _words.Sort();
     }
 
     /// <summary>
@@ -63,12 +71,22 @@ public class WordDictionary
         _words.Sort();
     }
 
+    /// <summary>
+    /// Используйте этот метод для проверки нахождения слова в словаре
+    /// </summary>
+    /// <param name="word">Слово для проверки</param>
+    /// <returns>True - если слово найдено, False - если нет</returns>
+    public bool HasWord(string word)
+    {
+        return _words.Contains(word);
+    }
+    
     private int GetLevensteinDistance(string word1, string word2)
     {
         var dist = Math.Abs(word1.Length - word2.Length);
         var wordArr1 = word1.ToCharArray();
         var wordArr2 = word2.ToCharArray();
-        var wordProcess = word1.Length - dist;
+        var wordProcess = Math.Min(wordArr1.Length, wordArr2.Length);
         for (int i = 0; i < wordProcess; i++)
         {
             if (wordArr1[i] != wordArr2[i])

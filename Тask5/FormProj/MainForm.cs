@@ -1,5 +1,8 @@
 ﻿using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Text;
 using DictClass;
+using UtfUnknown;
 
 namespace FormProj;
 
@@ -16,14 +19,17 @@ public partial class MainForm : Form
 
         return true;
     }
+    
     public MainForm()
     {
         InitializeComponent();
+        Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
     }
 
     private void listBoxWords_SelectedIndexChanged(object sender, EventArgs e)
     {
-        string word = listBoxWords.SelectedItem as string;
+        if (listBoxWords.SelectedIndices.Count == 0) return;
+        string word = _wordDictionary.Words[listBoxWords.SelectedIndices[0]] as string;
         if (word == null) return;
 
         textBox1.Text = word;
@@ -41,11 +47,12 @@ public partial class MainForm : Form
     {
         if (!CheckDictionary()) return;
         _wordDictionary.AddWord(textBox1.Text);
+        UpdateInfo();
     }
 
     private void textBox1_Validating(object sender, System.ComponentModel.CancelEventArgs e)
     {
-        textBox1.Text = textBox1.Text.Trim();
+        textBox1.Text = textBox1.Text.Trim().ToLower();
         if (textBox1.Text.Any(x => Char.IsWhiteSpace(x) || Char.IsDigit(x)))
         {
             ShowError("Это не слово");
@@ -57,6 +64,27 @@ public partial class MainForm : Form
     {
         if (!CheckDictionary()) return;
         _wordDictionary.RemoveWord(textBox1.Text);
+        UpdateInfo();
+    }
+
+    private void UpdateInfo()
+    {
+        var wordCount = _wordDictionary?.Words.Count ?? 0;
+        WordCountLabel.Text = "Слов в словаре: " + wordCount.ToString();
+
+        if (_wordDictionary == null)
+        {
+            listBoxWords.VirtualListSize = 0;
+            DictStatusLabel.Text = "Словарь не открыт";
+        }
+        else
+        {
+            listBoxWords.VirtualListSize = _wordDictionary.Words.Count;
+            DictStatusLabel.Text = "Словарь открыт";
+        }
+
+        listBoxWords.Invalidate();
+            
     }
 
     private void buttonSearch_Click(object sender, EventArgs e)
@@ -68,28 +96,32 @@ public partial class MainForm : Form
             ShowError("Слово не найдено");
             return;
         }
-        listBoxWords.SelectedIndex = found;
+        SelectItem(found);
     }
 
-    private void toolStripFindLevenstein_Click(object sender, EventArgs e)
+    private void SelectItem(int index)
     {
+        listBoxWords.SelectedIndices.Clear();
+        listBoxWords.SelectedIndices.Add(index);
 
+        listBoxWords.FocusedItem = listBoxWords.Items[index];
+        listBoxWords.EnsureVisible(index);
     }
 
     private void openDictButton_Click(object sender, EventArgs e)
     {
         DialogResult dialogResult = openDictDialog.ShowDialog();
         if (dialogResult != DialogResult.OK) return;
-
-        if (Path.GetExtension(openDictDialog.FileName) != "txt")
+        if (Path.GetExtension(openDictDialog.FileName) != ".txt")
         {
             ShowError("Словарь должен быть .txt файлом"); return;
         }
 
         try
         {
-            _wordDictionary = new WordDictionary(openDictDialog.FileName);
-            listBoxWords.DataSource = _wordDictionary.Words;
+            // Учет кодировки
+            _wordDictionary = new WordDictionary(openDictDialog.FileName, CharsetDetector.DetectFromFile(openDictDialog.FileName).Detected.Encoding);
+            UpdateInfo();
         }
         catch (Exception ex)
         {
@@ -116,17 +148,19 @@ public partial class MainForm : Form
     private void createNewDictButton_Click(object sender, EventArgs e)
     {
         this._wordDictionary = new WordDictionary();
-        listBoxWords.DataSource = _wordDictionary.Words;
+        UpdateInfo();
     }
 
     private void deleteNewDictButton_Click(object sender, EventArgs e)
     {
-        listBoxWords.DataSource = null;
-        this._wordDictionary = null;
+        if (!CheckDictionary()) return;
+        this._wordDictionary = null!;
+        UpdateInfo();
     }
 
     private void startSearchFromButton_Click(object sender, EventArgs e)
     {
+        if (!CheckDictionary()) return;
         if (string.IsNullOrWhiteSpace(startSearchFromTextbox.Text))
         {
             ShowError("Введите букву или символы для начала поиска (Справа от кнопки)");
@@ -137,8 +171,55 @@ public partial class MainForm : Form
         var found = _wordDictionary.Words.FindIndex(x => x.StartsWith(text));
         if (found == -1)
         {
-            ShowError("Последовательность или слов с такой буквы не существует");
+            ShowError("Слов с такой буквы или последовательности не существует");
             return;
+        }
+        
+        SelectItem(found);
+    }
+
+    private void getPalindromesButton_Click(object sender, EventArgs e)
+    {
+        if (!CheckDictionary()) return;
+        DialogResult dialogResult = savePalindromesDialog.ShowDialog();
+        if (dialogResult != DialogResult.OK) return;
+        try
+        {
+            _wordDictionary.SearchPalindromesToFile(savePalindromesDialog.FileName);
+        }
+        catch (Exception ex)
+        {
+            ShowError(ex.Message);
+        }
+    }
+    
+    private void toolStripFindLevenstein_Click(object sender, EventArgs e)
+    {
+        if (!CheckDictionary()) return;
+        var word = textBox1.Text;
+        if (string.IsNullOrWhiteSpace(word) || !_wordDictionary.HasWord(word))
+        {
+            ShowError("Введите верное слово в словаре");
+            return;
+        }
+
+        DialogResult dialogResult = saveLevensteinFile.ShowDialog();
+        if (dialogResult != DialogResult.OK) return;
+        
+        File.WriteAllLines(saveLevensteinFile.FileName,  _wordDictionary.SearchLevensteinDistance(word, 3));
+    }
+
+    private void listBoxWords_RetrieveVirtualItem(object sender, RetrieveVirtualItemEventArgs e)
+    {
+        if (_wordDictionary == null)
+        {
+            e.Item = new ListViewItem();
+            return;
+        }
+        if (e.ItemIndex >= 0 && e.ItemIndex < _wordDictionary.Words.Count)
+        {
+            var data = _wordDictionary.Words[e.ItemIndex];
+            e.Item = new ListViewItem(data);
         }
     }
 }
