@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Theme>
+    <Name>Основные операторы языка программирования C#</Name>
+    <difficulty level="easy" questions="3">
+        <questions>
+            <question img="1.jpg">
+                <title>Какой оператор используется для логического "И"</title>
+                <answers>
+                    <answer isTrue="true">&amp;&amp;</answer>
+                    <answer>||</answer>
+                    <answer>++</answer>
+                </answers>
+            </question>
+        </questions>
+    </difficulty>
+</Theme>
