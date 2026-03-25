@@ -42,7 +42,6 @@ public partial class FormProj : Form
     {
         labelDiff.Hide();
         comboBoxDiff.Hide();
-        labelTimer.Hide();
         buttonSelectDiff.Hide();
         labelTheme.Hide();
         comboBoxTheme.Hide();
@@ -52,10 +51,10 @@ public partial class FormProj : Form
     {
         labelDiff.Show();
         comboBoxDiff.Show();
-        labelTimer.Show();
         buttonSelectDiff.Show();
         labelTheme.Show();
         comboBoxTheme.Show();
+        
     }
 
     private void HideQuestions()
@@ -65,6 +64,7 @@ public partial class FormProj : Form
         panel1.Hide();
         buttonNext.Hide();
         buttonPrevious.Hide();
+        labelTimer.Hide();
     }
 
     private void ShowQuestions()
@@ -74,6 +74,7 @@ public partial class FormProj : Form
         panel1.Show();
         buttonNext.Show();
         buttonPrevious.Show();
+        labelTimer.Show();
     }
 
     #endregion
@@ -83,7 +84,7 @@ public partial class FormProj : Form
         var dialogResult = openTestsDialog.ShowDialog();
         if (dialogResult != DialogResult.OK) return;
 
-        _quizInfo = ThemeXmlH.GetTest(openTestsDialog.FileName);
+        _quizInfo = ProgrammingQuiz.GetTest(openTestsDialog.FileName);
         comboBoxDiff.Items.Clear();
         if (_quizInfo.Themes == null) return;
         foreach (var theme in _quizInfo.Themes) comboBoxTheme.Items.Add(theme);
@@ -96,6 +97,7 @@ public partial class FormProj : Form
     {
         HideSelect();
         ShowQuestions();
+        answers.Clear();
         if (difficulty.IsLocked) return;
         currentQuestions = difficulty.questions.Shuffle().Take(difficulty.questionsAmount).ToList();
 
@@ -122,18 +124,17 @@ public partial class FormProj : Form
             pictureBox1.Visible = false;
         }
 
-        if (findIndex == 0)
-        {
-            buttonPrevious.Enabled = false;
-        }
-        if (findIndex != currentQuestions.Count - 1)
-            buttonNext.Enabled = true;
-        else
-            buttonNext.Enabled = false;
+        buttonPrevious.Enabled = (findIndex > 0);
+
+        buttonNext.Enabled = (findIndex < currentQuestions.Count - 1);
 
         comboBoxAnswers.Items.Clear();
-        comboBoxAnswers.Items.AddRange(question.Answers.ToArray());
-        labelHeader.Text = question.Title;
+        foreach (var answerToAdd in question.Answers)
+            comboBoxAnswers.Items.Add(answerToAdd);
+
+        if (answers.TryGetValue(question, out var answer))
+            comboBoxAnswers.SelectedItem = answer;
+        labelHeader.Text = question.ToString();
         currentQuestion = question;
     }
 
@@ -147,7 +148,7 @@ public partial class FormProj : Form
         if (comboBoxTheme.SelectedIndex == -1) return;
         if (comboBoxTheme.SelectedItem is not Theme) return;
         comboBoxDiff.Items.Clear();
-        foreach (var diff in ((Theme)comboBoxTheme.SelectedItem).Difficulty.Where(x => !x.IsLocked))
+        foreach (var diff in ((Theme)comboBoxTheme.SelectedItem).Difficulties.Where(x => !x.IsLocked))
             comboBoxDiff.Items.Add(diff);
     }
 
@@ -158,18 +159,25 @@ public partial class FormProj : Form
 
     private void UnlockNextDiff(Theme theme)
     {
-        var mediumDiff = theme.Difficulty.Find(x => x.level == "medium");
+        var mediumDiff = theme.Difficulties.Find(x => x.level == Difficulty.MediumDifficulty);
         if (mediumDiff.IsLocked)
             mediumDiff.IsLocked = false;
         else
-            theme.Difficulty.Find(x => x.level == "hard").IsLocked = false;
+            theme.Difficulties.Find(x => x.level == Difficulty.HardDifficulty).IsLocked = false;
+
+        if (comboBoxTheme.SelectedIndex != -1)
+        {
+            comboBoxDiff.Items.Clear();
+            foreach (var diff in ((Theme)comboBoxTheme.SelectedItem).Difficulties.Where(x => !x.IsLocked))
+                comboBoxDiff.Items.Add(diff);
+        }
     }
 
 
 
     private void comboBoxAnswers_SelectedIndexChanged(object sender, EventArgs e)
     {
-        answers[currentQuestion] = currentQuestion.Answers[comboBoxAnswers.SelectedIndex];
+        answers[currentQuestion] = (Answer)comboBoxAnswers.SelectedItem;
     }
 
     private void CloseTest()
@@ -187,6 +195,8 @@ public partial class FormProj : Form
                 "Разблокировка", MessageBoxButtons.OK,
                 MessageBoxIcon.Information);
         }
+        HideQuestions();
+        ShowSelect();
     }
 
     private int GetResults()
@@ -196,7 +206,7 @@ public partial class FormProj : Form
             if (questionAnswer.Value.IsTrue)
                 result += questionAnswer.Key.Reward == 0 ? 10 : questionAnswer.Key.Reward;
 
-        return result;
+        return Math.Min(result, 100);
     }
 
    

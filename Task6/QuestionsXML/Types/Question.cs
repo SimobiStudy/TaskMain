@@ -4,7 +4,7 @@ namespace QuestionsXML.Types;
 
 public class Question
 {
-    [XmlAttribute("img")] public string? ImagePath { get; set; }
+    [XmlAttribute("img")] public string ImagePath { get; set; }
 
     [XmlElement("title")] public string? Title { get; set; }
     
@@ -14,4 +14,9 @@ public class Question
     [XmlArray("answers")]
     [XmlArrayItem("answer")]
     public List<Answer> Answers { get; set; }
+
+    public override string ToString()
+    {
+        return Title + $" ({Reward}б.)";
+    }
 }
