@@ -4,20 +4,17 @@ namespace QuestionsXML.Types;
 
 public class Difficulty
 {
-    [XmlAttribute("level")]
-    public string? level;
+    [XmlAttribute("level")] public string? level;
+    [XmlAttribute("time")] public int TimeToComplete { get; set; } = int.MaxValue; // в секундах
 
-    [XmlAttribute("questions")] 
-    public int questionsAmount;
-    
-    [XmlArray("questions")]
-    [XmlArrayItem("question")]
+    [XmlArray("questions")] [XmlArrayItem("question")]
     public List<Question>? questions;
-}
 
-public enum DifficultyLevel
-{
-    [XmlEnum("easy")] Easy,
-    [XmlEnum("normal")] Normal,
-    [XmlEnum("hard")] Hard,   
+    [XmlAttribute("questions")] public int questionsAmount;
+
+    [XmlAttribute("locked")] public bool IsLocked = true;
+    public override string ToString()
+    {
+        return level ?? "Unknown";
+    }
 }

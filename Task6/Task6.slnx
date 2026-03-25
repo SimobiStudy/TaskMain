@@ -1,3 +1,5 @@
 <Solution>
-  <Project Path="QuestionsXML/QuestionsXML.csproj" />
+    <Project Path="FormsProj/FormsProj.csproj"/>
+    <Project Path="QuestionsXML/QuestionsXML.csproj"/>
+    <Project Path="TestProject1/TestProject1.csproj"/>
 </Solution>

@@ -12,7 +12,7 @@ public class Tests
     [Test]
     public void Test1()
     {
-        var theme = ThemeXmlH.GetTheme(Path.GetFullPath("../../../files.xml"));
+        var theme = ThemeXmlH.GetTest(Path.GetFullPath("../../../files.xml"));
         Assert.Pass();
     }
 }
