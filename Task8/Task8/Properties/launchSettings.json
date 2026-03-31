@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "Task8": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "SUPABASE_KEY": "sb_publishable_dxkUON6jTRCbb4K9xIczZQ_KwQwKRNS",
+        "SUPABASE_URL": "https://nskxoqklasnyndzhzgzj.supabase.co"
+      }
+    }
+  }
+}

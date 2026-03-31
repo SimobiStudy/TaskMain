@@ -7,13 +7,11 @@ public class Main_
     public static void Main()
     {
         Console.WriteLine("Check");
-        string url, key, email, password;
+        string url, key;
         try
         {
             url = Environment.GetEnvironmentVariable("SUPABASE_URL")!;
             key = Environment.GetEnvironmentVariable("SUPABASE_KEY")!;
-            email = Environment.GetEnvironmentVariable("SUPABASE_EMAIL")!;
-            password = Environment.GetEnvironmentVariable("SUPABASE_PASS")!;
         }
         catch
         {
