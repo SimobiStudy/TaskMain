@@ -68,6 +68,8 @@ public partial class MainForm : Form
 
     private void RollbackAction()
     {
+        if (previousActionStorer.Count <= 0)
+            return;
         var action = previousActionStorer._list.Pop();
         action.Undo();
         panelCanvas.Invalidate();
@@ -97,7 +99,10 @@ public partial class MainForm : Form
     {
         try
         {
-            canvasInfo.SerializeFromBytes(File.ReadAllBytes(GetFilePath(true, false)));
+            var path = (GetFilePath(true, false));
+            if (path == null)
+                return;
+            canvasInfo.SerializeFromBytes(File.ReadAllBytes));
             panelCanvas.Invalidate();
         }
         catch (Exception ex)
