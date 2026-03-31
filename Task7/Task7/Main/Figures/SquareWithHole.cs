@@ -15,8 +15,8 @@ namespace Task7.Main.Figures
             graphics.FillRectangle(brush, _boundingBox);
          
 
-            int holeX = _boundingBox.X + (_boundingBox.Width) /2;
-            int holeY = _boundingBox.Y + (_boundingBox.Height) / 2;
+            int holeX = _boundingBox.X ;
+            int holeY = _boundingBox.Y ;
             Rectangle holeRect = new Rectangle(new Point(holeX, holeY), new Size(_boundingBox.Width, _boundingBox.Height));
             using Brush holeBrush = new SolidBrush(Color.White); // Цвет дырки (можно изменить)
             graphics.FillEllipse(holeBrush, holeRect);
