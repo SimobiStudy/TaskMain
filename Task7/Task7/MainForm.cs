@@ -102,7 +102,7 @@ public partial class MainForm : Form
             var path = (GetFilePath(true, false));
             if (path == null)
                 return;
-            canvasInfo.SerializeFromBytes(File.ReadAllBytes));
+            canvasInfo.SerializeFromBytes(File.ReadAllBytes(path));
             panelCanvas.Invalidate();
         }
         catch (Exception ex)
