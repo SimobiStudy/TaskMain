@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Test xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Theme>
+    <Name>Основные операторы языка программирования C#</Name>
+    <difficulty level="easy" questions="3" locked="false" time="180">
+      <questions>
+        <question reward="34">
+          <title>Какой оператор используется для логического "И"?</title>
+          <answers>
+            <answer isTrue="true">&amp;&amp;</answer>
+            <answer isTrue="false">||</answer>
+            <answer isTrue="false">!</answer>
+            <answer isTrue="false">&amp;</answer>
+          </answers>
+        </question>
+        <question reward="34">
+          <title>Какой оператор используется для логического "ИЛИ"?</title>
+          <answers>
+            <answer isTrue="true">||</answer>
+            <answer isTrue="false">&amp;&amp;</answer>
+            <answer isTrue="false">!=</answer>
+            <answer isTrue="false">|</answer>
+          </answers>
+        </question>
+        <question reward="34">
+          <title>Какой оператор увеличивает значение целочисленной переменной на единицу?</title>
+          <answers>
+            <answer isTrue="true">++</answer>
+            <answer isTrue="false">--</answer>
+            <answer isTrue="false">+=1</answer>
+            <answer isTrue="false">+1</answer>
+          </answers>
+        </question>
+        <question reward="34">
+          <title>Какой оператор используется для получения остатка от деления?</title>
+          <answers>
+            <answer isTrue="true">%</answer>
+            <answer isTrue="false">/</answer>
+            <answer isTrue="false">rem</answer>
+            <answer isTrue="false">&amp;</answer>
+          </answers>
+        </question>
+        <question reward="34">
+          <title>Какой оператор проверяет два значения на равенство?</title>
+          <answers>
+            <answer isTrue="true">==</answer>
+            <answer isTrue="false">=</answer>
+            <answer isTrue="false">equals</answer>
+            <answer isTrue="false">!=</answer>
+          </answers>
+        </question>
+        <question reward="34">
+          <title>Какой оператор выполняет логическое отрицание (НЕ)?</title>
+          <answers>
+            <answer isTrue="true">!</answer>
+            <answer isTrue="false">~</answer>
+            <answer isTrue="false">not</answer>
+            <answer isTrue="false">!=</answer>
+          </answers>
+        </question>
+        <question reward="34">
+          <title>Какой символ используется для простого присваивания значения переменной?</title>
+          <answers>
+            <answer isTrue="true">=</answer>
+            <answer isTrue="false">==</answer>
+            <answer isTrue="false">:=</answer>
+            <answer isTrue="false">=&gt;</answer>
+          </answers>
+        </question>
+        <question reward="34">
+          <title>Какой оператор используется для проверки на неравенство?</title>
+          <answers>
+            <answer isTrue="true">!=</answer>
+            <answer isTrue="false">&lt;&gt;</answer>
+            <answer isTrue="false">not=</answer>
+            <answer isTrue="false">==</answer>
+          </answers>
+        </question>
+        <question reward="34">
+          <title>Как обозначается оператор деления в C#?</title>
+          <answers>
+            <answer isTrue="true">/</answer>
+            <answer isTrue="false">\</answer>
+            <answer isTrue="false">div</answer>
+            <answer isTrue="false">%</answer>
+          </answers>
+        </question>
+        <question reward="34">
+          <title>Какой оператор используется для вычитания?</title>
+          <answers>
+            <answer isTrue="true">-</answer>
+            <answer isTrue="false">--</answer>
+            <answer isTrue="false">_</answer>
+            <answer isTrue="false">minus</answer>
+          </answers>
+        </question>
+      </questions>
+    </difficulty>
+    <difficulty level="medium" questions="5" locked="true" time="300">
+      <questions>
+        <question reward="20">
+          <title>Как называется оператор "?:"?</title>
+          <answers>
+            <answer isTrue="true">Тернарный оператор</answer>
+            <answer isTrue="false">Бинарный оператор</answer>
+            <answer isTrue="false">Оператор объединения</answer>
+            <answer isTrue="false">Лямбда-оператор</answer>
+          </answers>
+        </question>
+        <question reward="20">
+          <title>Какой оператор возвращает левый операнд, если он не null, иначе возвращает правый?</title>
+          <answers>
+            <answer isTrue="true">??</answer>
+            <answer isTrue="false">?.</answer>
+            <answer isTrue="false">?</answer>
+            <answer isTrue="false">::</answer>
+          </answers>
+        </question>
+        <question reward="20">
+          <title>Какой оператор проверяет, совместим ли объект с указанным типом?</title>
+          <answers>
+            <answer isTrue="true">is</answer>
+            <answer isTrue="false">as</answer>
+            <answer isTrue="false">typeof</answer>
+            <answer isTrue="false">in</answer>
+          </answers>
+        </question>
+        <question reward="20">
+          <title>Какой оператор выполняет явное приведение типов, возвращая null при неудаче?</title>
+          <answers>
+            <answer isTrue="true">as</answer>
+            <answer isTrue="false">is</answer>
+            <answer isTrue="false">to</answer>
+            <answer isTrue="false">cast</answer>
+            <answer isTrue="false">Новый ответ</answer>
+          </answers>
+        </question>
+        <question reward="20">
+          <title>Какой оператор используется для побитового "ИЛИ"?</title>
+          <answers>
+            <answer isTrue="true">|</answer>
+            <answer isTrue="false">||</answer>
+            <answer isTrue="false">^</answer>
+            <answer isTrue="false">&amp;</answer>
+          </answers>
+        </question>
+        <question reward="20">
+          <title>Что делает оператор "&lt;&lt;"?</title>
+          <answers>
+            <answer isTrue="true">Сдвигает биты влево</answer>
+            <answer isTrue="false">Меньше чем</answer>
+            <answer isTrue="false">Сдвигает биты вправо</answer>
+            <answer isTrue="false">Возводит в степень</answer>
+          </answers>
+        </question>
+        <question reward="20">
+          <title>Каков результат выражения 10 + 5 * 2?</title>
+          <answers>
+            <answer isTrue="true">20</answer>
+            <answer isTrue="false">30</answer>
+            <answer isTrue="false">25</answer>
+            <answer isTrue="false">15</answer>
+          </answers>
+        </question>
+        <question reward="20">
+          <title>Какой оператор сокращенно записывает сложение и присваивание?</title>
+          <answers>
+            <answer isTrue="true">+=</answer>
+            <answer isTrue="false">++</answer>
+            <answer isTrue="false">=+</answer>
+            <answer isTrue="false">add</answer>
+          </answers>
+        </question>
+        <question reward="20">
+          <title>Чем отличается x++ от ++x?</title>
+          <answers>
+            <answer isTrue="true">x++ возвращает значение до инкремента</answer>
+            <answer isTrue="false">++x возвращает значение до инкремента</answer>
+            <answer isTrue="false">Ничем не отличаются</answer>
+            <answer isTrue="false">x++ работает быстрее</answer>
+          </answers>
+        </question>
+        <question reward="20">
+          <title>Какой оператор используется для доступа к членам пространства имен или класса?</title>
+          <answers>
+            <answer isTrue="true">.</answer>
+            <answer isTrue="false">::</answer>
+            <answer isTrue="false">-&gt;</answer>
+            <answer isTrue="false">@</answer>
+          </answers>
+        </question>
+      </questions>
+    </difficulty>
+    <difficulty level="hard" questions="7" locked="true" time="300">
+      <questions>
+        <question reward="15">
+          <title>Какой оператор (null-conditional) позволяет безопасно обращаться к членам объекта, который может быть null?</title>
+          <answers>
+            <answer isTrue="true">?.</answer>
+            <answer isTrue="false">??</answer>
+            <answer isTrue="false">!!</answer>
+            <answer isTrue="false">?</answer>
+          </answers>
+        </question>
+        <question reward="15">
+          <title>Какой оператор выполняет побитовое исключающее "ИЛИ" (XOR)?</title>
+          <answers>
+            <answer isTrue="true">^</answer>
+            <answer isTrue="false">~</answer>
+            <answer isTrue="false">!</answer>
+            <answer isTrue="false">|&amp;|</answer>
+          </answers>
+        </question>
+        <question reward="15">
+          <title>Какой оператор возвращает размер типа в байтах?</title>
+          <answers>
+            <answer isTrue="true">sizeof</answer>
+            <answer isTrue="false">typeof</answer>
+            <answer isTrue="false">length</answer>
+            <answer isTrue="false">bytecount</answer>
+          </answers>
+        </question>
+        <question reward="15">
+          <title>Какой оператор используется для получения объекта System.Type для заданного типа?</title>
+          <answers>
+            <answer isTrue="true">typeof</answer>
+            <answer isTrue="false">is</answer>
+            <answer isTrue="false">GetType()</answer>
+            <answer isTrue="false">classof</answer>
+          </answers>
+        </question>
+        <question reward="15">
+          <title>Какой оператор используется для включения проверки на переполнение при арифметических операциях?</title>
+          <answers>
+            <answer isTrue="true">checked</answer>
+            <answer isTrue="false">unchecked</answer>
+            <answer isTrue="false">overflow</answer>
+            <answer isTrue="false">strict</answer>
+          </answers>
+        </question>
+        <question reward="15">
+          <title>Какой оператор присваивает значение переменной, только если она равна null?</title>
+          <answers>
+            <answer isTrue="true">??=</answer>
+            <answer isTrue="false">?=</answer>
+            <answer isTrue="false">null=</answer>
+            <answer isTrue="false">??</answer>
+          </answers>
+        </question>
+        <question reward="15">
+          <title>Что делает оператор "~"?</title>
+          <answers>
+            <answer isTrue="true">Побитовое дополнение (инверсия бит)</answer>
+            <answer isTrue="false">Логическое отрицание</answer>
+            <answer isTrue="false">Приблизительное равенство</answer>
+            <answer isTrue="false">Удаление объекта</answer>
+          </answers>
+        </question>
+        <question reward="15">
+          <title>Каков приоритет операторов: что выполнится первым в выражении (true | false &amp; false)?</title>
+          <answers>
+            <answer isTrue="true">Побитовое/логическое И (&amp;)</answer>
+            <answer isTrue="false">Побитовое/логическое ИЛИ (|)</answer>
+            <answer isTrue="false">Выполняется слева направо</answer>
+            <answer isTrue="false">Выполняется справа налево</answer>
+          </answers>
+        </question>
+        <question reward="15">
+          <title>Для чего используется оператор "default"?</title>
+          <answers>
+            <answer isTrue="true">Для получения значения по умолчанию для типа</answer>
+            <answer isTrue="false">Для обозначения метки в switch</answer>
+            <answer isTrue="false">Для сброса значения переменной</answer>
+            <answer isTrue="false">Для вызова конструктора</answer>
+          </answers>
+        </question>
+        <question reward="15">
+          <title>Какой оператор используется для создания объекта и вызова его конструктора?</title>
+          <answers>
+            <answer isTrue="true">new</answer>
+            <answer isTrue="false">create</answer>
+            <answer isTrue="false">init</answer>
+            <answer isTrue="false">alloc</answer>
+          </answers>
+        </question>
+      </questions>
+    </difficulty>
+  </Theme>
+</Test>
